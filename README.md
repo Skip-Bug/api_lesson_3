@@ -1,4 +1,4 @@
-# Проект: Делаем коротыши
+# Проект: Сокращатель ссылок
 Программа для сокращения длинных ссылок и подсчёта кликов по ним с использованием сервиса clc.li.
  - Делаем из <a href="https://github.com/Skip-Bug/api_lesson_2/tree/main" title="https://github.com/Skip-Bug/api_lesson_2/tree/main">длинных</a> ссылок <a href="clc.li/pwcjP" title="clc.li/pwcjP">короткие</a>
 По коротким ссылкам ведем статистику 'кликов'   
