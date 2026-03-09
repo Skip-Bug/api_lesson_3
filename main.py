@@ -17,11 +17,10 @@ def shorten_link(token, link):
         'https://clc.li/api/url/add',
         headers=headers,
         json=body
-        )
+    )
     response.raise_for_status()
     return response.json()['shorturl']
-    
-    
+
 
 def create_parser():
     parser = argparse.ArgumentParser(
@@ -29,10 +28,10 @@ def create_parser():
     )
     parser.add_argument(
         'link',
-        nargs='?',
         help='Ссылка для обработки'
     )
     return parser
+
 
 def get_count_clicks(token, link):
     headers = {
@@ -43,8 +42,7 @@ def get_count_clicks(token, link):
     response = requests.get(
         url=f'https://clc.li/api/urls?short={link}',
         headers=headers
-        )
-
+    )
     response.raise_for_status()
     return response.json()
 
@@ -58,19 +56,17 @@ def main():
     parser = create_parser()
     args = parser.parse_args()
     token = os.getenv('CLC_LI_TOKEN')
-    link = args.link or input("Введите ссылку: ").strip()
 
     if not token:
         print("ОШИБКА: Не найден токен в переменных окружения!")
         return
 
-
-    if is_shorten_link(link):
+    if is_shorten_link(args.link):
         try:
             link_stats = get_count_clicks(
                 token,
-                link
-                )
+                args.link
+            )
 
             if 'data' in link_stats:
                 clicks_count = link_stats['data'].get('clicks', 0)
@@ -80,13 +76,12 @@ def main():
                 print(f"API вернул ошибку: {error}")
             else:
                 print("Не удалось получить статистику")
-
         except requests.exceptions.HTTPError:
             print("Ошибка соединения с API!")
         return
 
     try:
-        full_short_link = shorten_link(token, link)
+        full_short_link = shorten_link(token, args.link)
         print('Короткая ссылка ', full_short_link)
     except requests.exceptions.HTTPError:
         print("ОШИБКА: Проблема при обращении к API!")
