@@ -13,6 +13,7 @@ python --version
    ```bash
 pip install -r requirements.txt
   ```
+
 **Программе нужен специальный ключ (токен), чтобы работать с сервером clc.li.**
 ###  Получите токен
 - Зарегистрируйтесь на сайте [clc.li](https://clc.li)
